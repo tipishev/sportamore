@@ -1,0 +1,1 @@
+CONSUMERS = {"Dam", "Herr", "Barn"}
