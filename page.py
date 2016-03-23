@@ -15,8 +15,10 @@ class BasePage(object):
         self.driver = driver
 
 
+""" These objects abstract methods for interacting with corresponding page types """
+
 class MainPage(BasePage):
-    """Home page action methods come here. I.e. Python.org"""
+    """Main page (sportamore.se)"""
 
     #Declares a variable that will contain the retrieved text
     search_text_element = SearchTextElement()
@@ -31,10 +33,18 @@ class MainPage(BasePage):
         element.click()
 
 
-class SearchResultsPage(BasePage):
-    """Search results page action methods come here"""
+class EndUserProductCategoryPage(BasePage):
+    """End user type and product category page, e.g. sportamore.se/dam/klader/jackor/"""
 
     def is_results_found(self):
         # Probably should search for this text in the specific page
         # element, but as for now it works fine
         return "No results found." not in self.driver.page_source
+
+
+class ProductPage(BasePage):
+    """Product page, e.g. https://www.sportamore.se/produkt/89563-blacc-glow-f-rosa"""
+
+class AddToShoppingCartPage(BasePage):
+    """Add to shopping cart page (https://www.sportamore.se/cart/add/)"""
+
