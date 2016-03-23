@@ -10,6 +10,6 @@ class BasePageLocators(object):
         assert item in CONSUMERS, "unknown consumer type"
         return (By.LINK_TEXT, item)
 
-# class SearchResultsPageLocators(object):
-#     """A class for search results locators. All search results locators should come here"""
-#     pass
+class ConsumerProductCategoryPageLocators(object):
+    """Locators specific to Consumer Product Category pages"""
+    FEATURED_PRODUCT_LOCATOR = (By.CLASS_NAME, "featured-wrapper")

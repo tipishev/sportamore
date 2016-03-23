@@ -22,13 +22,14 @@ class SportamoreTestCase(unittest.TestCase):
 
         driver = self.driver
         main_page = MainPage(self.driver)
-        consumer_product_category_page = ConsumerProductCategoryPage(
-                main_page.go_to_consumer_product_category(CONSUMER, PRODUCT_CATEGORY))
+        main_page.go_to_consumer_product_category(CONSUMER, PRODUCT_CATEGORY)
+        consumer_product_category_page = ConsumerProductCategoryPage(driver)
 
+        consumer_product_category_page.click_on_featured_product()
         # self.assertTrue(driver.current_url.endswith("sportamore.se/herr/byxor/"))
         # self.assertTrue(driver.current_url.endswith("sportamore.se/herr/klader/byxor/"))
-        # featured_product = driver.find_element_by_class_name("featured-wrapper")
-        # ActionChains(driver).click(featured_product).perform()
+
+
 
         # time.sleep(1) # FIXME
         # buy_form = driver.find_element_by_id("buy-form")

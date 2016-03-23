@@ -5,8 +5,9 @@ title_contains = expected_conditions.title_contains
 
 from elements import BasePageElement
 from checkers import RolledDownChecker
-from locators import BasePageLocators
+from locators import BasePageLocators, ConsumerProductCategoryPageLocators
 consumer_menu_locator = BasePageLocators.consumer_menu_locator
+featured_product_locator = ConsumerProductCategoryPageLocators.FEATURED_PRODUCT_LOCATOR
 
 TIMEOUT = 5 # seconds
 
@@ -33,6 +34,11 @@ class MainPage(BasePage):
 
 class ConsumerProductCategoryPage(BasePage):
     """Consumer type and product category page, e.g. sportamore.se/dam/klader/jackor/"""
+    def click_on_featured_product(self):
+        driver = self.driver
+        featured_product = driver.find_element(*featured_product_locator)
+        ActionChains(driver).click(featured_product).perform()
+
 
 class ProductPage(BasePage):
     """Product page, e.g. https://www.sportamore.se/produkt/89563-blacc-glow-f-rosa"""
