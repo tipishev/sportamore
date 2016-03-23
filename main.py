@@ -9,8 +9,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 import time
 
-import page
-
 TIMEOUT = 5 # seconds
 
 class RolledDownChecker(object):
@@ -57,8 +55,11 @@ class SportamoreTestCase(unittest.TestCase):
         upsell_items = driver.find_element_by_id("mp_promoted_row")
         links = upsell_items.find_elements_by_tag_name("a")
         link_texts = set(link.text for link in links if link.text)
-        expected_link_texts = set(['Slim 500ml', '3Ppk Value No Show', 'Running sock 2-pack'])
-        self.assertTrue(expected_link_texts.issubset(link_texts))
+        expected_link_texts = set(['Slim 500ml', '3Ppk Value No Show'])
+        self.assertTrue(expected_link_texts.issubset(link_texts),
+                "The expected upsell products {} are not present in {}".format(
+                    expected_link_texts, link_texts)
+                )
 
         def tearDown(self):
             self.driver.close()
