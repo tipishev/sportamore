@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions
 title_contains = expected_conditions.title_contains
 
 from elements import BasePageElement
-from checkers import RolledDownChecker
+from checkers import RolledDownChecker, UrlContainsChecker
 from locators import BasePageLocators, ConsumerProductCategoryPageLocators
 consumer_menu_locator = BasePageLocators.consumer_menu_locator
 featured_product_locator = ConsumerProductCategoryPageLocators.FEATURED_PRODUCT_LOCATOR
@@ -38,7 +38,8 @@ class ConsumerProductCategoryPage(BasePage):
         driver = self.driver
         featured_product = driver.find_element(*featured_product_locator)
         ActionChains(driver).click(featured_product).perform()
-
+        switched_to_product_page = UrlContainsChecker("produkt")
+        WebDriverWait(driver, TIMEOUT).until(switched_to_product_page)
 
 class ProductPage(BasePage):
     """Product page, e.g. https://www.sportamore.se/produkt/89563-blacc-glow-f-rosa"""

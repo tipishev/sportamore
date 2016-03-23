@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 import time
 
-from pages import MainPage, ConsumerProductCategoryPage
+from pages import MainPage, ConsumerProductCategoryPage, ProductPage
 
 
 class SportamoreTestCase(unittest.TestCase):
@@ -21,11 +21,14 @@ class SportamoreTestCase(unittest.TestCase):
         UPSELL_ITEMS = {'Slim 500ml', '3Ppk Value No Show'}
 
         driver = self.driver
-        main_page = MainPage(self.driver)
-        main_page.go_to_consumer_product_category(CONSUMER, PRODUCT_CATEGORY)
-        consumer_product_category_page = ConsumerProductCategoryPage(driver)
 
+        main_page = MainPage(driver)
+        main_page.go_to_consumer_product_category(CONSUMER, PRODUCT_CATEGORY)
+
+        consumer_product_category_page = ConsumerProductCategoryPage(driver)
         consumer_product_category_page.click_on_featured_product()
+
+        product_page = ProductPage(driver)
         # self.assertTrue(driver.current_url.endswith("sportamore.se/herr/byxor/"))
         # self.assertTrue(driver.current_url.endswith("sportamore.se/herr/klader/byxor/"))
 
