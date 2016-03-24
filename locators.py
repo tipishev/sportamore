@@ -1,3 +1,5 @@
+"""Element locators, scoped by page classes using them"""
+
 from selenium.webdriver.common.by import By
 from domain import CONSUMERS
 
@@ -13,3 +15,8 @@ class BasePageLocators(object):
 class ConsumerProductCategoryPageLocators(object):
     """Locators specific to Consumer Product Category pages"""
     FEATURED_PRODUCT_LOCATOR = (By.CLASS_NAME, "featured-wrapper")
+
+class ProductPageLocators(object):
+    """Locators specific to Product pages"""
+    SIZE_SELECT_LOCATOR = (By.XPATH, "//*[@id='buy-form']/select")
+    BUY_FORM_LOCATOR = (By.ID, "buy-form")

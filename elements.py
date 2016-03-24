@@ -1,20 +1,18 @@
-from selenium.webdriver.support.ui import WebDriverWait
+"""Page elements with specific business logic"""
 
+from selenium.webdriver.support.ui import Select
 
-class BasePageElement(object):
-    """Base page class that is initialized on every page object class."""
+class SizeSelect(Select):
+    """A wrapper for product size selector"""
 
-    def __set__(self, obj, value):
-        """Sets the text to the value supplied"""
-        driver = obj.driver
-        WebDriverWait(driver, 100).until(
-            lambda driver: driver.find_element_by_name(self.locator))
-        driver.find_element_by_name(self.locator).send_keys(value)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-    def __get__(self, obj, owner):
-        """Gets the text of the specified object"""
-        driver = obj.driver
-        WebDriverWait(driver, 100).until(
-            lambda driver: driver.find_element_by_name(self.locator))
-        element = driver.find_element_by_name(self.locator)
-        return element.get_attribute("value")
+    def select_first_size(self):
+        """Selects first size available"""
+        first_size = self.options[1].text  # because 0th is "Välj storlek"
+        self.select_by_visible_text(first_size)
+
+    def select_smallest(self):
+        """Selects the smallest size"""
+        self.select_first_size()
