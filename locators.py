@@ -6,7 +6,7 @@ class BasePageLocators(object):
 
     @staticmethod
     def consumer_menu_locator(item):
-        """Locator for consumer menu"""
+        """Locator for consumer (Herr/Dam/Barn) entry in hover menu"""
         assert item in CONSUMERS, "unknown consumer type"
         return (By.LINK_TEXT, item)
 

@@ -22,12 +22,15 @@ class SportamoreTestCase(unittest.TestCase):
 
         driver = self.driver
 
+        # navigate from the Main page to "herr/byxor" via hover-menu
         main_page = MainPage(driver)
         main_page.go_to_consumer_product_category(CONSUMER, PRODUCT_CATEGORY)
 
+        # click on featured product
         consumer_product_category_page = ConsumerProductCategoryPage(driver)
-        consumer_product_category_page.click_on_featured_product()
+        consumer_product_category_page.go_to_featured_product()
 
+        # proceed to quick checkout
         product_page = ProductPage(driver)
         # self.assertTrue(driver.current_url.endswith("sportamore.se/herr/byxor/"))
         # self.assertTrue(driver.current_url.endswith("sportamore.se/herr/klader/byxor/"))

@@ -1,7 +1,7 @@
-"""A collection of classes that check for certain conditions"""
+"""A collection of callables that check for certain conditions"""
 
 class RolledDownChecker(object):
-    """a callable that checks if a hover menu displays an item"""
+    """checks if an item is shown in hover menu"""
 
     def __init__(self, link_text):
         self._link_text = link_text
@@ -11,7 +11,7 @@ class RolledDownChecker(object):
         return item if item.location_once_scrolled_into_view['y'] > 0 else None
 
 class UrlContainsChecker(object):
-    """a callable that checks if the URL contains a string"""
+    """checks if the URL contains a string"""
 
     def __init__(self, url_substring):
         self._url_substring = url_substring

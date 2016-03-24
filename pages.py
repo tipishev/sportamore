@@ -34,7 +34,7 @@ class MainPage(BasePage):
 
 class ConsumerProductCategoryPage(BasePage):
     """Consumer type and product category page, e.g. sportamore.se/dam/klader/jackor/"""
-    def click_on_featured_product(self):
+    def go_to_featured_product(self):
         driver = self.driver
         featured_product = driver.find_element(*featured_product_locator)
         ActionChains(driver).click(featured_product).perform()
