@@ -20,3 +20,7 @@ class ProductPageLocators(object):
     """Locators specific to Product pages"""
     SIZE_SELECT_LOCATOR = (By.XPATH, "//*[@id='buy-form']/select")
     BUY_FORM_LOCATOR = (By.ID, "buy-form")
+
+class AddToShoppingCartPageLocators(object):
+    """Locators specific to Add to Shopping Cart"""
+    UPSELL_ITEMS_SELECTOR = (By.XPATH, '//*[@id="mp_promoted_row"]/*/article/div[1]/div/a/span')

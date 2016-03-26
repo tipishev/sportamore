@@ -40,16 +40,15 @@ class SportamoreTestCase(unittest.TestCase):
         product_page.size_select.select_first_size()
         product_page.go_to_add_to_cart()
 
-       # check the actual upsell products against expected
+        # check the actual upsell products against expected
+        add_to_cart_page = AddToShoppingCartPage(driver)
+        actual_upsell = add_to_cart_page.get_upsell_items()
 
-        # upsell_items = driver.find_element_by_id("mp_promoted_row")
-        # links = upsell_items.find_elements_by_tag_name("a")
-        # link_texts = set(link.text for link in links if link.text)
-        # expected_link_texts = set(['Slim 500ml', '3Ppk Value No Show'])
-        # self.assertTrue(expected_link_texts.issubset(link_texts),
-        #         "The expected upsell products {} are not present in {}".format(
-        #             expected_link_texts, link_texts)
-        #         )
+        self.assertTrue(EXPECTED_UPSELL_ITEMS.issubset(actual_upsell),
+                "Unexpected upsell items: {}".format(
+                    EXPECTED_UPSELL_ITEMS.difference(actual_upsell)
+                )
+        )
 
         def tearDown(self):
             self.driver.close()

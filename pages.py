@@ -5,11 +5,14 @@ from elements import SizeSelect
 from checkers import RolledDown, UrlChanged
 from locators import (BasePageLocators,
                       ConsumerProductCategoryPageLocators,
-                      ProductPageLocators)
+                      ProductPageLocators,
+                      AddToShoppingCartPageLocators
+                      )
 consumer_menu_locator = BasePageLocators.consumer_menu_locator
 featured_product_locator = ConsumerProductCategoryPageLocators.FEATURED_PRODUCT_LOCATOR
 size_select_locator = ProductPageLocators.SIZE_SELECT_LOCATOR
 buy_form_locator = ProductPageLocators.BUY_FORM_LOCATOR
+upsell_items_locator = AddToShoppingCartPageLocators.UPSELL_ITEMS_SELECTOR
 
 TIMEOUT = 7 # seconds
 
@@ -62,3 +65,8 @@ class ProductPage(BasePage):
 
 class AddToShoppingCartPage(BasePage):
     """Add to shopping cart page (https://www.sportamore.se/cart/add/)"""
+    def get_upsell_items(self):
+        upsell_items = self.driver.find_elements(*upsell_items_locator)
+        return {item.text.strip() for item in upsell_items}  # strip due to padding
+
+
