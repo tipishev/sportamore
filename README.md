@@ -8,21 +8,28 @@ System Requirements: a Unix-like OS with java and python3.
 pip3 install -r requrements.txt
 ```
 
-## Launching tests
+Download the Selenium server
 ```
-# launch the Selenium grid hub
-java -jar selenium-server-standalone-2.52.0.jar -port 4444 -role hub -nodeTimeout 1000
+wget http://goo.gl/IHP6Qw
+```
 
-&
+## Launching tests
 
-# launch the first Firefox node
-java -jar selenium-server-standalone-2.52.0.jar -role node -hub http://localhost:4444/grid/register -browser browserName=firefox -port 5555
+1. Launch the Selenium grid hub
+```
+java -jar selenium-server-standalone-2.53.0.jar -port 4444 -role hub -nodeTimeout 1000
+```
 
-&
+2.1 Launch the first Firefox node on port 5555
+```
+java -jar selenium-server-standalone-2.53.0.jar -role node -hub http://localhost:4444/grid/register -browser browserName=firefox -port 5555
+```
 
-# launch the second Firefox node
-java -jar selenium-server-standalone-2.52.0.jar -role node -hub http://localhost:4444/grid/register -browser browserName=firefox -port 5556
+2.2 Launch the second Firefox node on port 5556
+```
+java -jar selenium-server-standalone-2.53.0.jar -role node -hub http://localhost:4444/grid/register -browser browserName=firefox -port 5556
 
-# run the tests
+3. Run the two tests in parallel
+```
 py.test -n 2 main.py
 ```
