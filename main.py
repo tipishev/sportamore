@@ -2,6 +2,8 @@
 
 import unittest
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
 from pages import (
         MainPage,
         ConsumerProductCategoryPage,
@@ -9,17 +11,24 @@ from pages import (
         AddToShoppingCartPage
 )
 
+REMOTE_DRIVER_ENDPOINT = "http://127.0.0.1:4444/wd/hub"
+MAIN_PAGE_URL = "https://www.sportamore.se"
 
 class SportamoreTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Firefox()  # TODO: play with remote driver
-        self.driver.get("https://www.sportamore.se")
+        # self.driver = webdriver.Firefox()
+        self.driver = webdriver.Remote(
+                command_executor = REMOTE_DRIVER_ENDPOINT,
+                desired_capabilities = DesiredCapabilities.FIREFOX,
+        )
+        self.driver.get(MAIN_PAGE_URL)
 
     def test_upsell_on_featured_product(self):
         CONSUMER = "Dam"
         PRODUCT_CATEGORY = "Underkläder"
-        EXPECTED_UPSELL_ITEMS = {'Slim 500ml', '3Ppk Value No Show'}
+        EXPECTED_URL = "https://www.sportamore.se/dam/klader/underklader/"
+        EXPECTED_UPSELL = {'Slim 500ml', '3Ppk Value No Show'}
 
         driver = self.driver
 
@@ -27,11 +36,10 @@ class SportamoreTestCase(unittest.TestCase):
         main_page = MainPage(driver)
         main_page.go_to_consumer_product_category(CONSUMER, PRODUCT_CATEGORY)
 
-        # self.assertTrue(driver.current_url.endswith("sportamore.se/herr/byxor/"))
-        # self.assertTrue(driver.current_url.endswith("sportamore.se/herr/klader/byxor/"))
-
         # click on the featured product
         consumer_product_category_page = ConsumerProductCategoryPage(driver)
+        current_url = consumer_product_category_page.current_url
+        self.assertEqual(current_url, EXPECTED_URL)
         consumer_product_category_page.go_to_featured_product()
 
         # proceed to quantity selection
@@ -44,9 +52,9 @@ class SportamoreTestCase(unittest.TestCase):
         add_to_cart_page = AddToShoppingCartPage(driver)
         actual_upsell = add_to_cart_page.get_upsell_items()
 
-        self.assertTrue(EXPECTED_UPSELL_ITEMS.issubset(actual_upsell),
+        self.assertTrue(EXPECTED_UPSELL.issubset(actual_upsell),
                 "Unexpected upsell items: {}".format(
-                    EXPECTED_UPSELL_ITEMS.difference(actual_upsell)
+                    EXPECTED_UPSELL.difference(actual_upsell)
                 )
         )
 

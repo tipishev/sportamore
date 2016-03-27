@@ -6,11 +6,12 @@ from selenium.webdriver.support.ui import WebDriverWait, Select
 from config import TIMEOUT, log
 from elements import SizeSelect
 from checkers import RolledDown, UrlChanged
-from locators import (BasePageLocators,
-                      ConsumerProductCategoryPageLocators,
-                      ProductPageLocators,
-                      AddToShoppingCartPageLocators
-                      )
+from locators import (
+    BasePageLocators,
+    ConsumerProductCategoryPageLocators,
+    ProductPageLocators,
+    AddToShoppingCartPageLocators
+)
 consumer_menu_locator = BasePageLocators.consumer_menu_locator
 featured_product_locator = ConsumerProductCategoryPageLocators.FEATURED_PRODUCT_LOCATOR
 size_select_locator = ProductPageLocators.SIZE_SELECT_LOCATOR
@@ -25,8 +26,9 @@ class BasePage(object):
         class_name = self.__class__.__name__
         log.debug("Wrap {} inside {}".format(driver.current_url, class_name))
 
-    def get_current_url(self):
-        return self.driver.get_current_url()
+    @property
+    def current_url(self):
+        return self.driver.current_url
 
     def wait_for_url_change(self):
         WebDriverWait(self.driver, TIMEOUT).until(UrlChanged(self.driver))
