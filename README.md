@@ -2,13 +2,8 @@
 
 ## Installation Instructions
 
-Requirements:
-* java
-* python3
-
+System Requirements: a Unix-like OS with java and python3.
 
 ```
-pip install -U selenium
-
-
+pip3 install -r requrements.txt
 ```
