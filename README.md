@@ -10,7 +10,7 @@ pip3 install -r requrements.txt
 
 Download the Selenium server
 ```
-wget http://goo.gl/IHP6Qw server.jar
+wget http://goo.gl/IHP6Qw -O server.jar
 ```
 
 ## Launching tests
