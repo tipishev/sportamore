@@ -1,6 +1,9 @@
+"""Page objects to abstract interaction with pages"""
+
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait, Select
 
+from config import TIMEOUT, log
 from elements import SizeSelect
 from checkers import RolledDown, UrlChanged
 from locators import (BasePageLocators,
@@ -14,15 +17,13 @@ size_select_locator = ProductPageLocators.SIZE_SELECT_LOCATOR
 buy_form_locator = ProductPageLocators.BUY_FORM_LOCATOR
 upsell_items_locator = AddToShoppingCartPageLocators.UPSELL_ITEMS_SELECTOR
 
-TIMEOUT = 7 # seconds
-
-"""These objects abstract methods for interacting with corresponding page types"""
-
 class BasePage(object):
     """Base class to initialize the base page that will be called from all pages"""
 
     def __init__(self, driver):
         self.driver = driver
+        class_name = self.__class__.__name__
+        log.debug("Wrap {} inside {}".format(driver.current_url, class_name))
 
     def get_current_url(self):
         return self.driver.get_current_url()
