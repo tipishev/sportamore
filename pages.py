@@ -68,5 +68,3 @@ class AddToShoppingCartPage(BasePage):
     def get_upsell_items(self):
         upsell_items = self.driver.find_elements(*upsell_items_locator)
         return {item.text.strip() for item in upsell_items}  # strip due to padding
-
-

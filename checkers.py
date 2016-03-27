@@ -1,4 +1,4 @@
-"""Callables that check for certain event to happen"""
+"""Callables that check for certain events to happen"""
 
 class RolledDown(object):
     """Checks that a link with given text is shown in hover menu"""
@@ -11,7 +11,7 @@ class RolledDown(object):
         return item if item.location_once_scrolled_into_view['y'] > 0 else None
 
 class UrlChanged(object):
-    """Checks that the URL has changed"""
+    """Checks that the URL has changed since initialization"""
 
     def __init__(self, driver):
         self.initial_url = driver.current_url

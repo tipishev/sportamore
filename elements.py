@@ -9,10 +9,10 @@ class SizeSelect(Select):
         super().__init__(*args, **kwargs)
 
     def select_first_size(self):
-        """Selects first size available"""
+        """Selects the first size available"""
         first_size = self.options[1].text  # because 0th is "Välj storlek"
         self.select_by_visible_text(first_size)
 
     def select_smallest(self):
         """Selects the smallest size"""
-        self.select_first_size()
+        self.select_first_size()  # may improve with domain knowledge (XS, S)
