@@ -1,5 +1,8 @@
 # Python + Selenium UI testing for Sportamore
 
+## Basic architecture
+![Architecture](http://i.imgur.com/x1OSMxz.png)
+
 ## Installation Instructions
 
 System Requirements: a Unix-like OS with java and python3.
