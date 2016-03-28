@@ -16,3 +16,7 @@ class SizeSelect(Select):
     def select_smallest(self):
         """Selects the smallest size"""
         self.select_first_size()  # may improve with domain knowledge (XS, S)
+
+class HoverMenu(object):
+    """A wrapper for working with the main hover menu"""
+    pass
