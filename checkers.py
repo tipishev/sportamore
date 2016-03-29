@@ -8,7 +8,7 @@ class RolledDown(object):
 
     def __call__(self, driver):
         item = driver.find_element_by_link_text(self._link_text)
-        return item if item.location_once_scrolled_into_view['y'] > 0 else None
+        return item if item.location_once_scrolled_into_view['y'] > 3 else None
 
 class UrlChanged(object):
     """Checks that the URL has changed since initialization"""
